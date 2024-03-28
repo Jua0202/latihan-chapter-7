@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class JumlahHari2 {
+    public int hitungHari(int tahun, int bulan) {
+        if (bulan < 1 || bulan > 12) {
+            throw new IllegalArgumentException("Bulan tidak valid");
+        }
+
+        switch (bulan) {
+            case 1, 3, 5, 7, 8, 10, 12:
+                return 31;
+            case 4, 6, 9, 11:
+                return 30;
+            case 2:
+                if (tahun % 400 == 0 || (tahun % 4 == 0 && tahun % 100 != 0)) {
+                    return 29;
+                } else {
+                    return 28;
+                }
+            default:
+                throw new IllegalArgumentException("Bulan tidak valid");
+        }
+    }
+}
+
+public class JumlahHari2Beraksi {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        JumlahHari2 jumlahHari2 = new JumlahHari2();
+
+        System.out.print("Masukkan tahun: ");
+        int tahun = scanner.nextInt();
+
+        System.out.print("Masukkan bulan: ");
+        int bulan = scanner.nextInt();
+
+        try {
+            int jumlahHari = jumlahHari2.hitungHari(tahun, bulan);
+            System.out.println("Jumlah hari pada tahun " + tahun + " bulan " + bulan + " adalah " + jumlahHari + " hari");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
